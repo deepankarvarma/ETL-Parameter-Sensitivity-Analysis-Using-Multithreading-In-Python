@@ -88,6 +88,7 @@ num_records = []
 
 # Split each file into smaller chunks and apply the ETL process through multithreading pipeline
 for file in files:
+    execution_time_file = []
     for chunk_size in range(50, 550, 50):
         start_time = time.time() # Start the timer
         split_file(file, chunk_size) # Split the file
@@ -95,22 +96,11 @@ for file in files:
         end_time = time.time() # Stop the timer
 
         # Compute the execution time and number of records for the transformed data
-        execution_time.append(end_time - start_time)
-        num_records.append(len(transformed_data))
+        execution_time_file.append(end_time - start_time)
 
-        # Print the results
-print(f"File: {file}, Chunk Size: {chunk_size}, Execution Time: {end_time - start_time:.2f} seconds, Number of Records: {len(transformed_data)}")
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
-fig.suptitle("Performance Metrics")
-
-ax1.plot(num_records)
-ax1.set_xlabel("Experiment")
-ax1.set_ylabel("Number of Records")
-ax1.set_title("Transformed Data Size")
-
-ax2.plot(execution_time)
-ax2.set_xlabel("Experiment")
-ax2.set_ylabel("Execution Time (seconds)")
-ax2.set_title("Execution Time")
-
-plt.show()
+    # Plot the execution time for the current file
+    plt.plot(range(50, 550, 50), execution_time_file)
+    plt.xlabel('Split Size')
+    plt.ylabel('Execution Time')
+    plt.title(f'Execution Time vs Split Size for {file}')
+    plt.show()
