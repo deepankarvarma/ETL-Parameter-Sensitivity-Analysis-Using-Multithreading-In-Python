@@ -87,6 +87,10 @@ execution_time = []
 num_records = []
 
 # Split each file into smaller chunks and apply the ETL process through multithreading pipeline
+import pandas as pd
+from IPython.display import display
+results = pd.DataFrame(columns=['File', 'Split Size', 'Execution Time'])
+
 for file in files:
     execution_time_file = []
     for chunk_size in range(50, 550, 50):
@@ -98,9 +102,14 @@ for file in files:
         # Compute the execution time and number of records for the transformed data
         execution_time_file.append(end_time - start_time)
 
+        # Store the results in the DataFrame
+        results = results.append({'File': file, 'Split Size': chunk_size, 'Execution Time': end_time - start_time}, ignore_index=True)
+        results.to_csv('results.csv', index=False)
+
     # Plot the execution time for the current file
     plt.plot(range(50, 550, 50), execution_time_file)
     plt.xlabel('Split Size')
     plt.ylabel('Execution Time (seconds)')
     plt.title(f'Execution Time vs Split Size for {file}')
     plt.show()
+
