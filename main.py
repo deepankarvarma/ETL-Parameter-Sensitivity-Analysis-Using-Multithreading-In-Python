@@ -14,7 +14,7 @@ def extract(file):
 # Define the function to transform data
 def transform(data):
     # Compute the mean and standard deviation of each column in the data
-    mean = data.mean()
+    mean = data.mean(numeric_only=True)
     std = data.std(numeric_only=True)
 
     # Subtract the mean from each column and divide by the standard deviation
@@ -101,6 +101,6 @@ for file in files:
     # Plot the execution time for the current file
     plt.plot(range(50, 550, 50), execution_time_file)
     plt.xlabel('Split Size')
-    plt.ylabel('Execution Time')
+    plt.ylabel('Execution Time (seconds)')
     plt.title(f'Execution Time vs Split Size for {file}')
     plt.show()

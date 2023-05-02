@@ -1,8 +1,8 @@
 # ETL System with Parameter Sensitivity Analysis
 
-This project contains an extract, transform, load (ETL) system implemented in Python. The system extracts data from CSV files, transforms it as required, and loads it into a database.
+This project contains an extract, transform, load (ETL) system implemented in Python. The system extracts data from CSV files, transforms it as required, and loads it into a database using multithreading pipeline with different number of splits.
 
-The system has been designed to perform parameter sensitivity analysis. Specifically, it plots the execution time of different file sizes as a parameter sensitivity and plots the number of records in the particular file with the total time taken for the process.
+The system has been designed to perform parameter sensitivity analysis. Specifically, it plots the execution time of different split sizes as a parameter sensitivity.
 
 ## Getting Started
 
@@ -37,9 +37,20 @@ python etl_system.py
 
 This will execute the ETL system for each file in the `files` list and plot the results.
 
-## License
+## Parameter Sensitivity
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The split size with minimum execution time is the best size for splitting the sample into chunks.
+
+## Results
+
+The plot of split size vs execution time for the different files are as shown.
+
+![Figure_1](Figure_1.png)
+![Figure_2](Figure_2.png)
+![Figure_3](Figure_3.png)
+![Figure_4](Figure_4.png)
+![Figure_5](Figure_5.png)
+![Figure_6](Figure_6.png)
 
 ## Acknowledgments
 
